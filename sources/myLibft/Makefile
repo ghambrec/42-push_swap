@@ -6,7 +6,7 @@
 #    By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/18 15:19:22 by ghambrec          #+#    #+#              #
-#    Updated: 2024/11/18 17:42:00 by ghambrec         ###   ########.fr        #
+#    Updated: 2024/11/20 15:46:26 by ghambrec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,6 @@ TOTAL_SRCS = $(words $(SOURCES))
 CURRENT = 0
 
 # ---------- RULES ---------- #
-
 all: $(NAME)
 
 $(NAME): $(OBJECTS)
@@ -58,7 +57,7 @@ $(OBJECT_DIR)/%.o: %.c | $(OBJECT_DIR)
 	@$(eval CURRENT := $(shell echo $$(($(CURRENT) + 1))))
 	@$(eval PERCENT := $(shell echo $$(($(CURRENT) * 100 / $(TOTAL_SRCS)))))
 	@printf "$(CLEAR_LINE)$(YELLOW)Compiling $(PERCENT)%% [$(CURRENT)/$(TOTAL_SRCS)] $(CYAN)$<$(NC)"
-	@$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJECT_DIR):
 	@echo "$(YELLOW)Creating $(OBJECT_DIR) directory$(NC)"
