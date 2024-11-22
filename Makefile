@@ -6,7 +6,7 @@
 #    By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/18 18:50:52 by ghambrec          #+#    #+#              #
-#    Updated: 2024/11/20 16:58:38 by ghambrec         ###   ########.fr        #
+#    Updated: 2024/11/22 14:45:44 by ghambrec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,23 @@ $(NAME): $(LIBFT_NAME) $(OBJECTS)
 		echo "$(RED)failed to compile $(NAME)$(NC)"; \
 		exit 1; \
 	fi
+
+# test rule for faster testing (without compiling myLibft again)
+test: $(OBJECTS)
+	@echo "$(YELLOW)Compiling $(NAME)$(NC)"
+	@cc $(CFLAGS) $(OBJECTS) $(LIBFT_DIR)/$(LIBFT_NAME) -o $(NAME)
+	@if [ -f $(NAME) ]; then \
+		echo "$(CYAN)--------------------------------------$(NC)"; \
+		echo "$(GREEN)BUILD PROCESS COMPLETED SUCCESSFULLY!$(NC)"; \
+		echo "$(CYAN)--------------------------------------$(NC)"; \
+	else \
+		echo "$(RED)failed to compile $(NAME)$(NC)"; \
+		exit 1; \
+	fi
+
+# exec test without flags
+testnf: CFLAGS = -I $(INCLUDE_DIR)
+testnf: test
 	
 $(LIBFT_NAME):
 	@echo "$(YELLOW)Creating $(LIBFT_NAME)$(NC)"
@@ -82,4 +99,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re test testnf
