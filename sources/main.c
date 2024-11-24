@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:03:25 by ghambrec          #+#    #+#             */
-/*   Updated: 2024/11/22 14:59:50 by ghambrec         ###   ########.fr       */
+/*   Updated: 2024/11/24 20:08:08 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,92 @@ void	ft_lstadd_back_gha(t_stack **lst, t_stack *new)
 //		duplicate values
 
 
+
+static int	is_number(char *str)
+{
+	if (ft_strchr("+-", *str))
+	{
+		str++;
+	}
+	while (*str)
+	{
+		if (!ft_isdigit(*str))
+		{
+			return (0);
+		}
+		str++;
+	}
+	return (1);
+}
+
+static int	check_duplicate(int num, t_stack *a)
+{
+	while (a != NULL)
+	{
+		if (a->data == num)
+		{
+			return (EXIT_FAILURE);
+		}
+		a = a->next;
+	}
+	return (EXIT_SUCCESS);
+}
+
+static int	parse_input_data(char **data, t_stack *a)
+{
+	int		i;
+	long	current_num;
+
+	i = 0;
+	while (data[i])
+	{
+		if (!is_number(data[i]))
+		{
+			return (EXIT_FAILURE);
+		}
+		current_num = ft_atol(data[i]);
+		if (current_num < INT_MIN || current_num > INT_MAX)
+		{
+			return (EXIT_FAILURE);
+		}
+		if (check_duplicate(current_num, a) == EXIT_FAILURE)
+		{
+			return (EXIT_FAILURE);
+		}
+		// malloc space for t_stack and add the number to the t_stack
+		// linked list pointer explanation >>>>TODO<<<<
+		
+		// printf("%s\n",data[i]);
+		i++;
+	}
+
+	return (EXIT_SUCCESS);
+}
+
 // parse data and return EXIT_FAILURE if there is a problem with the arguments
-int	parse_input_data(int argc, char **argv, t_stack *a)
+// possible outputs: EXIT_FAILURE (1) || EXIT_SUCCESS (0)
+int	start_parsing(int argc, char **argv, t_stack *a)
 {
 	//go on here: create new function in myLibft atol and use it here to convert the numbers
 	//if the converted number not in the int range int_min int_max then return exit_failure
-	// what happens if i try to convert a string through the atol function??
+	// what happens if i try to convert a string through the atol function?? >>>> retur = 0 >>>> darf nur atol anwenden
+	//   wenn zahl auch eine zahl ist
+
+
+	
+	if (argc == 2)
+	{
+		// call ft_split and with this result parse, after that free ft_split result
+	}
+	if (argc > 2)
+	{
+		// argv+1 weitergeben zum parsen
+		return(parse_input_data(argv + 1, a));
+	}
+
+
+
+	return (5);
 }
 
 
@@ -103,15 +183,29 @@ int	main(int argc, char *argv[])
 	{
 		return (EXIT_FAILURE);
 	}
-	parsing_result = parse_input_data(argc, argv, a);
+	parsing_result = start_parsing(argc, argv, a);
 	if (parsing_result == EXIT_FAILURE)
 	{
+		// free a-stack and all what is in there
 		ft_putstr_fd("Error\n", STDERR_FILENO);
+		return(EXIT_FAILURE);
 	}
+	
+	
+	t_stack *temp;
+	// // to testing
+	// temp = a;
+	// temp->data = NULL;
+	// while (temp != NULL)
+	// {
+	// 	printf("%i\n", temp->data);
+	// 	temp = temp->next;
+	// }
+	return (0);
+	
 
 	
-	// t_stack *b;
-	t_stack *temp;
+
 	
 	a = ft_lstnew_gha(1);
 	temp = ft_lstnew_gha(20);
@@ -126,12 +220,6 @@ int	main(int argc, char *argv[])
 	printf("%s\n",argv[1]);
 	printf("%s\n",argv[2]);
 
-	temp = a;
-	while (temp != NULL)
-	{
-		printf("%i\n", temp->data);
-		temp = temp->next;
-	}
-	
+
 	return (EXIT_SUCCESS);
 }

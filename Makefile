@@ -6,7 +6,7 @@
 #    By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/18 18:50:52 by ghambrec          #+#    #+#              #
-#    Updated: 2024/11/22 14:45:44 by ghambrec         ###   ########.fr        #
+#    Updated: 2024/11/24 19:20:34 by ghambrec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,7 +54,7 @@ $(NAME): $(LIBFT_NAME) $(OBJECTS)
 
 # test rule for faster testing (without compiling myLibft again)
 test: $(OBJECTS)
-	@echo "$(YELLOW)Compiling $(NAME)$(NC)"
+	@echo "$(YELLOW)\nCompiling $(NAME)$(NC)"
 	@cc $(CFLAGS) $(OBJECTS) $(LIBFT_DIR)/$(LIBFT_NAME) -o $(NAME)
 	@if [ -f $(NAME) ]; then \
 		echo "$(CYAN)--------------------------------------$(NC)"; \
