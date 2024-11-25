@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:03:25 by ghambrec          #+#    #+#             */
-/*   Updated: 2024/11/25 16:34:19 by ghambrec         ###   ########.fr       */
+/*   Updated: 2024/11/25 16:52:51 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@ void	free_stack(t_stack **stack)
 	*stack = NULL;
 }
 
+void	check_is_sorted(t_stack **a)
+{
+	// go on here
+}
+
 int	main(int argc, char *argv[])
 {
 	t_stack	*a;
@@ -38,10 +43,13 @@ int	main(int argc, char *argv[])
 	parsing_result = start_parsing(argc, argv, &a);
 	if (parsing_result == EXIT_FAILURE)
 	{
-		free_stack(&a);
+		if (a != NULL)
+			free_stack(&a);
 		ft_putstr_fd("Error\n", STDERR_FILENO);
 		return(EXIT_FAILURE);
 	}
+
+	// check_is_sorted(&a);
 
 	// print stack a
 	t_stack *temp;

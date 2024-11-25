@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 14:24:03 by ghambrec          #+#    #+#             */
-/*   Updated: 2024/11/25 16:34:17 by ghambrec         ###   ########.fr       */
+/*   Updated: 2024/11/25 16:52:14 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ static int	parse_input_data(char **data, t_stack **a)
 {
 	int		i;
 	long	current_num;
+	t_stack	*created_list;
 
 	i = 0;
 	while (data[i])
@@ -75,10 +76,13 @@ static int	parse_input_data(char **data, t_stack **a)
 			return (EXIT_FAILURE);
 		if (check_duplicate(current_num, *a) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
+		created_list = ft_lstnew_ps(current_num);
+		if (!created_list)
+			return (EXIT_FAILURE);
 		if (*a == NULL)
-			*a = ft_lstnew_ps(current_num);
+			*a = created_list;
 		else
-			ft_lstadd_back_ps(a, ft_lstnew_ps(current_num));
+			ft_lstadd_back_ps(a, created_list);
 		i++;
 	}
 	return (EXIT_SUCCESS);
