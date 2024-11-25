@@ -6,7 +6,7 @@
 #    By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/18 18:50:52 by ghambrec          #+#    #+#              #
-#    Updated: 2024/11/24 19:20:34 by ghambrec         ###   ########.fr        #
+#    Updated: 2024/11/25 14:35:19 by ghambrec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ CFLAGS = -Wall -Wextra -Werror -I $(INCLUDE_DIR)
 
 # ---------- SOURCES ---------- #
 VPATH = ./sources
-SOURCES = main.c
+SOURCES = main.c parsing.c list_operations.c
 
 # ---------- OBJECTS ---------- #
 OBJECT_DIR = objects

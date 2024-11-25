@@ -1,0 +1,112 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/25 14:24:03 by ghambrec          #+#    #+#             */
+/*   Updated: 2024/11/25 14:45:10 by ghambrec         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "push_swap.h"
+
+static void	free_split(char **split)
+{
+	int	i;
+
+	i = 0;
+	while (split[i])
+	{
+		free(split[i]);
+		i++;
+	}
+	free(split);
+}
+
+static int	is_number(char *str)
+{
+	if (ft_strchr("+-", *str))
+	{
+		str++;
+	}
+	while (*str)
+	{
+		if (!ft_isdigit(*str))
+		{
+			return (0);
+		}
+		str++;
+	}
+	return (1);
+}
+
+static int	check_duplicate(int num, t_stack *a)
+{
+	while (a != NULL)
+	{
+		if (a->data == num)
+		{
+			return (EXIT_FAILURE);
+		}
+		a = a->next;
+	}
+	return (EXIT_SUCCESS);
+}
+
+// error handling:
+//		argument is not a number
+//		argument is out of int range
+//		duplivate values
+// add numbers to the a-stack
+static int	parse_input_data(char **data, t_stack **a)
+{
+	int		i;
+	long	current_num;
+
+	i = 0;
+	while (data[i])
+	{
+		if (!is_number(data[i]))
+			return (EXIT_FAILURE);
+		current_num = ft_atol(data[i]);
+		if (current_num < INT_MIN || current_num > INT_MAX)
+			return (EXIT_FAILURE);
+		if (check_duplicate(current_num, *a) == EXIT_FAILURE)
+			return (EXIT_FAILURE);
+		if (*a == NULL)
+			*a = ft_lstnew_ps(current_num);
+		else
+			ft_lstadd_back_ps(a, ft_lstnew_ps(current_num));
+		i++;
+	}
+	return (EXIT_SUCCESS);
+}
+
+// possible outputs:
+//		EXIT_SUCCESS (0)
+// 		EXIT_FAILURE (1)
+int	start_parsing(int argc, char **argv, t_stack **a)
+{
+	int		parsing_result;
+	char	**split;
+
+	if (argc == 2)
+	{
+		split = ft_split(argv[1], ' ');
+		if (split == NULL)
+		{
+			return (EXIT_FAILURE);
+		}
+		parsing_result = parse_input_data(split, a);
+		free_split(split);
+		return (parsing_result);
+	}
+	if (argc > 2)
+	{
+		parsing_result = parse_input_data(argv + 1, a);
+		return (parsing_result);
+	}
+	return (EXIT_FAILURE);
+}

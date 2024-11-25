@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:07:44 by ghambrec          #+#    #+#             */
-/*   Updated: 2024/11/22 14:54:47 by ghambrec         ###   ########.fr       */
+/*   Updated: 2024/11/25 14:34:40 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,5 +22,13 @@ typedef struct s_stack
 	int				data;
 	struct s_stack	*next;
 }	t_stack;
+
+// PARSING
+int		start_parsing(int argc, char **argv, t_stack **a);
+
+// LIST OPERATIONS
+t_stack	*ft_lstnew_ps(int content);
+t_stack	*ft_lstlast_ps(t_stack *lst);
+void	ft_lstadd_back_ps(t_stack **lst, t_stack *new);
 
 #endif
