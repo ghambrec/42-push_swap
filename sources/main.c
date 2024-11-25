@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:03:25 by ghambrec          #+#    #+#             */
-/*   Updated: 2024/11/25 16:52:51 by ghambrec         ###   ########.fr       */
+/*   Updated: 2024/11/25 17:18:18 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,24 @@ void	free_stack(t_stack **stack)
 	*stack = NULL;
 }
 
-void	check_is_sorted(t_stack **a)
+int	check_is_sorted(t_stack *a)
 {
-	// go on here
+	int	prev_number;
+
+	prev_number = INT_MIN;
+	if (ft_lstsize_ps(a) > 1)
+	{
+		while (a != NULL)
+		{
+			if (a->data < prev_number)
+			{
+				return (FALSE);
+			}
+			prev_number = a->data;
+			a = a->next;
+		}
+	}
+	return (TRUE);
 }
 
 int	main(int argc, char *argv[])
@@ -48,8 +63,12 @@ int	main(int argc, char *argv[])
 		ft_putstr_fd("Error\n", STDERR_FILENO);
 		return(EXIT_FAILURE);
 	}
+	if (check_is_sorted(a) == TRUE)
+	{
+		return (EXIT_SUCCESS);
+	}
 
-	// check_is_sorted(&a);
+
 
 	// print stack a
 	t_stack *temp;
@@ -64,3 +83,6 @@ int	main(int argc, char *argv[])
 	free_stack(&a);
 	return (EXIT_SUCCESS);
 }
+
+
+// im parsing bei is_number TRUE oder FALSE anwenden anstatt 1 und 0

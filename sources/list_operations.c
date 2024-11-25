@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 14:31:56 by ghambrec          #+#    #+#             */
-/*   Updated: 2024/11/25 14:34:25 by ghambrec         ###   ########.fr       */
+/*   Updated: 2024/11/25 17:01:02 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,18 @@ t_stack	*ft_lstnew_ps(int content)
 	return (new_entry);
 }
 
-// int	ft_lstsize_ps(t_stack *lst)
-// {
-// 	int	size;
+int	ft_lstsize_ps(t_stack *lst)
+{
+	int	size;
 
-// 	size = 0;
-// 	while (lst != NULL)
-// 	{
-// 		size++;
-// 		lst = lst->next;
-// 	}
-// 	return (size);
-// }
+	size = 0;
+	while (lst != NULL)
+	{
+		size++;
+		lst = lst->next;
+	}
+	return (size);
+}
 
 t_stack	*ft_lstlast_ps(t_stack *lst)
 {
