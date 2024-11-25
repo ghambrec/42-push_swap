@@ -1,5 +1,5 @@
 .DS_Store
-.vscode/
+/.vscode/
 sources/myLibft/libft.a
 push_swap
-objects/
+/objects/
