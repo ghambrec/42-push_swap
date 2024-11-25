@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/24 18:26:27 by ghambrec          #+#    #+#             */
-/*   Updated: 2024/11/24 18:47:31 by ghambrec         ###   ########.fr       */
+/*   Updated: 2024/11/25 16:40:02 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,3 @@ long	ft_atol(const char *str)
 		num *= -1;
 	return (num);
 }
-
