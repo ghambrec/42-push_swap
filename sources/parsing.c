@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 14:24:03 by ghambrec          #+#    #+#             */
-/*   Updated: 2024/11/25 16:52:14 by ghambrec         ###   ########.fr       */
+/*   Updated: 2024/11/25 17:19:47 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ static int	is_number(char *str)
 	{
 		if (!ft_isdigit(*str))
 		{
-			return (0);
+			return (FALSE);
 		}
 		str++;
 	}
-	return (1);
+	return (TRUE);
 }
 
 static int	check_duplicate(int num, t_stack *a)

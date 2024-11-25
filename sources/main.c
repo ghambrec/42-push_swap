@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:03:25 by ghambrec          #+#    #+#             */
-/*   Updated: 2024/11/25 17:18:18 by ghambrec         ###   ########.fr       */
+/*   Updated: 2024/11/25 17:20:22 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,3 @@ int	main(int argc, char *argv[])
 	free_stack(&a);
 	return (EXIT_SUCCESS);
 }
-
-
-// im parsing bei is_number TRUE oder FALSE anwenden anstatt 1 und 0
