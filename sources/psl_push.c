@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   psl_swap.c                                         :+:      :+:    :+:   */
+/*   psl_push.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/22 14:24:06 by ghambrec          #+#    #+#             */
-/*   Updated: 2024/11/25 17:45:17 by ghambrec         ###   ########.fr       */
+/*   Created: 2024/11/25 17:46:39 by ghambrec          #+#    #+#             */
+/*   Updated: 2024/11/25 18:01:15 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	swap(t_stack *stack)
+void	push(t_stack **src, t_stack **dest)
 {
-	int	temp;
-	
-	if (ft_lstsize_ps(stack) <= 1)
+	t_stack *temp;
+
+	if (*src == NULL)
 	{
 		return ;
 	}
-	temp = stack->data;
-	stack->data = stack->next->data;
-	stack->next->data = temp;
-}
-
-void	swap_both(t_stack *a, t_stack *b)
-{
-	swap(a);
-	swap(b);
+	temp = *src;
+	*src = (*src)->next;
+	ft_lstadd_front_ps(dest, temp);
 }

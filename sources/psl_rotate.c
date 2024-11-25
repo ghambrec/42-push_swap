@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   psl_swap.c                                         :+:      :+:    :+:   */
+/*   psl_rotate.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/22 14:24:06 by ghambrec          #+#    #+#             */
-/*   Updated: 2024/11/25 17:45:17 by ghambrec         ###   ########.fr       */
+/*   Created: 2024/11/25 18:12:53 by ghambrec          #+#    #+#             */
+/*   Updated: 2024/11/25 18:57:34 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	swap(t_stack *stack)
+void	rotate(t_stack **stack)
 {
-	int	temp;
-	
-	if (ft_lstsize_ps(stack) <= 1)
+	t_stack	*temp;
+	t_stack	*last;
+
+	if (ft_lstsize_ps(*stack) >= 2)
 	{
-		return ;
+		temp = *stack;
+		*stack = temp->next;
+		temp->next = NULL;
+		last = ft_lstlast_ps(*stack);
+		last->next = temp;
 	}
-	temp = stack->data;
-	stack->data = stack->next->data;
-	stack->next->data = temp;
 }
 
-void	swap_both(t_stack *a, t_stack *b)
+void	rotate_both(t_stack **a, t_stack **b)
 {
-	swap(a);
-	swap(b);
+	rotate(a);
+	rotate(b);
 }

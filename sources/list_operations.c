@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 14:31:56 by ghambrec          #+#    #+#             */
-/*   Updated: 2024/11/25 17:01:02 by ghambrec         ###   ########.fr       */
+/*   Updated: 2024/11/25 17:59:25 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,11 @@ void	ft_lstadd_back_ps(t_stack **lst, t_stack *new)
 	last_entry->next = new;
 }
 
-// void	ft_lstadd_front_ps(t_stack **lst, t_stack *new)
-// {
-// 	if (new != NULL)
-// 	{
-// 		new->next = *lst;
-// 		*lst = new;
-// 	}
-// }
+void	ft_lstadd_front_ps(t_stack **lst, t_stack *new)
+{
+	if (new != NULL)
+	{
+		new->next = *lst;
+		*lst = new;
+	}
+}
