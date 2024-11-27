@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:03:25 by ghambrec          #+#    #+#             */
-/*   Updated: 2024/11/25 19:02:56 by ghambrec         ###   ########.fr       */
+/*   Updated: 2024/11/27 13:56:54 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	free_stack(t_stack **stack)
 {
-	t_stack *temp;
+	t_stack	*temp;
 
 	if (*stack == NULL)
 	{
@@ -49,6 +49,51 @@ int	check_is_sorted(t_stack *a)
 	return (TRUE);
 }
 
+void	test_print_stack(t_stack *stack, char *text)
+{
+	printf("%s", text);
+	while (stack != NULL)
+	{
+		printf("[%i]\n", stack->data);
+		stack = stack->next;
+	}
+}
+
+void	sort_2(t_stack **a)
+{
+	if (ft_lstsize_ps(*a) == 2)
+		swap(*a);
+}
+
+void	sort_max_3(t_stack **a)
+{
+	sort_2(a);
+	if (ft_lstsize_ps(*a) == 3)
+	{
+		if ((*a)->data > (*a)->next->data && \
+		(*a)->next->data > (*a)->next->next->data)
+		{
+			swap(*a);
+			reverse_rotate(a);
+		}
+		else if ((*a)->data > (*a)->next->next->data && \
+		(*a)->next->next->data > (*a)->next->data)
+			rotate(a);
+		else if ((*a)->next->data > (*a)->data && \
+		(*a)->data > (*a)->next->next->data)
+			swap(*a);
+		else if ((*a)->next->data > (*a)->next->next->data && \
+		(*a)->next->next->data > (*a)->data)
+		{
+			swap(*a);
+			rotate(a);
+		}
+		else if ((*a)->next->next->data > (*a)->data && \
+		(*a)->data > (*a)->next->data)
+			reverse_rotate(a);
+	}
+}
+
 int	main(int argc, char *argv[])
 {
 	t_stack	*a;
@@ -65,36 +110,20 @@ int	main(int argc, char *argv[])
 		ft_putstr_fd("Error\n", STDERR_FILENO);
 		return(EXIT_FAILURE);
 	}
-	if (check_is_sorted(a) == TRUE)
+	// print stack a before sorting anything
+	test_print_stack(a, "a:------------------\n");
+	if (check_is_sorted(a) == TRUE || ft_lstsize_ps(a) == 1)
 	{
+		test_print_stack(a, "SORTED--------------\n");
 		free_stack(&a);
 		return (EXIT_SUCCESS);
 	}
-
-	// push(&a, &b);
-	// push(&a, &b);
-	// push(&a, &b);
-	// rotate(&a);
-	
-
-	// print stack a
-	t_stack *temp;
-	temp = a;
-	printf("a:------------------\n");
-	while (temp != NULL)
+	if (ft_lstsize_ps(a) <= 3)
 	{
-		printf("[%i]\n", temp->data);
-		temp = temp->next;
+		sort_max_3(&a);
 	}
-	printf("b:------------------\n");
-	// print stack b
-	temp = b;
-	while (temp != NULL)
-	{
-		printf("[%i]\n", temp->data);
-		temp = temp->next;
-	}
+	test_print_stack(a, "SORTED--------------\n");
 	free_stack(&a);
 	free_stack(&b);
-	return (EXIT_SUCCESS);
+	return (EXIT_SUCCESS);	
 }
