@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:07:44 by ghambrec          #+#    #+#             */
-/*   Updated: 2024/11/25 18:45:01 by ghambrec         ###   ########.fr       */
+/*   Updated: 2024/11/27 15:38:11 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,9 @@ void	rotate(t_stack **stack);
 void	rotate_both(t_stack **a, t_stack **b);
 void	reverse_rotate(t_stack **stack);
 void	reverse_rotate_both(t_stack **a, t_stack **b);
+
+// SORTING
+void	sort_max_3(t_stack **a);
+void	sort(t_stack **a, t_stack **b);
 
 #endif

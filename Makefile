@@ -6,7 +6,7 @@
 #    By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/18 18:50:52 by ghambrec          #+#    #+#              #
-#    Updated: 2024/11/25 18:45:35 by ghambrec         ###   ########.fr        #
+#    Updated: 2024/11/27 15:02:23 by ghambrec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ CFLAGS = -Wall -Wextra -Werror -I $(INCLUDE_DIR)
 
 # ---------- SOURCES ---------- #
 VPATH = ./sources
-SOURCES = main.c parsing.c list_operations.c psl_swap.c psl_push.c psl_rotate.c psl_reverse_rotate.c
+SOURCES = main.c parsing.c list_operations.c psl_swap.c psl_push.c psl_rotate.c psl_reverse_rotate.c sort_max_3.c sort.c
 
 # ---------- OBJECTS ---------- #
 OBJECT_DIR = objects

@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:03:25 by ghambrec          #+#    #+#             */
-/*   Updated: 2024/11/27 13:56:54 by ghambrec         ###   ########.fr       */
+/*   Updated: 2024/11/27 16:35:33 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,20 +31,13 @@ void	free_stack(t_stack **stack)
 
 int	check_is_sorted(t_stack *a)
 {
-	int	prev_number;
-
-	prev_number = INT_MIN;
-	if (ft_lstsize_ps(a) > 1)
+	while (a->next)
 	{
-		while (a != NULL)
+		if (a->data > a->next->data)
 		{
-			if (a->data < prev_number)
-			{
-				return (FALSE);
-			}
-			prev_number = a->data;
-			a = a->next;
+			return (FALSE);
 		}
+		a = a->next;
 	}
 	return (TRUE);
 }
@@ -56,41 +49,6 @@ void	test_print_stack(t_stack *stack, char *text)
 	{
 		printf("[%i]\n", stack->data);
 		stack = stack->next;
-	}
-}
-
-void	sort_2(t_stack **a)
-{
-	if (ft_lstsize_ps(*a) == 2)
-		swap(*a);
-}
-
-void	sort_max_3(t_stack **a)
-{
-	sort_2(a);
-	if (ft_lstsize_ps(*a) == 3)
-	{
-		if ((*a)->data > (*a)->next->data && \
-		(*a)->next->data > (*a)->next->next->data)
-		{
-			swap(*a);
-			reverse_rotate(a);
-		}
-		else if ((*a)->data > (*a)->next->next->data && \
-		(*a)->next->next->data > (*a)->next->data)
-			rotate(a);
-		else if ((*a)->next->data > (*a)->data && \
-		(*a)->data > (*a)->next->next->data)
-			swap(*a);
-		else if ((*a)->next->data > (*a)->next->next->data && \
-		(*a)->next->next->data > (*a)->data)
-		{
-			swap(*a);
-			rotate(a);
-		}
-		else if ((*a)->next->next->data > (*a)->data && \
-		(*a)->data > (*a)->next->data)
-			reverse_rotate(a);
 	}
 }
 
@@ -111,18 +69,17 @@ int	main(int argc, char *argv[])
 		return(EXIT_FAILURE);
 	}
 	// print stack a before sorting anything
-	test_print_stack(a, "a:------------------\n");
+	// test_print_stack(a, "a:------------------\n");
 	if (check_is_sorted(a) == TRUE || ft_lstsize_ps(a) == 1)
 	{
 		test_print_stack(a, "SORTED--------------\n");
 		free_stack(&a);
 		return (EXIT_SUCCESS);
 	}
-	if (ft_lstsize_ps(a) <= 3)
-	{
-		sort_max_3(&a);
-	}
-	test_print_stack(a, "SORTED--------------\n");
+	sort(&a, &b);
+	// test_print_stack(a, "SORTED--------------\n");
+	test_print_stack(a, "\nA:------------------\n");
+	test_print_stack(b, "\nB:------------------\n");
 	free_stack(&a);
 	free_stack(&b);
 	return (EXIT_SUCCESS);	
