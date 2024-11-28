@@ -41,55 +41,88 @@ t_stack *find_max(t_stack *stack)
 	return (max);
 }
 
-void	init_stack(t_stack *stack1, t_stack *stack2)
-{	
-	t_stack *target;
-	t_stack	*temp;
-	t_stack *temp1 = stack1;
-	t_stack *temp2 = stack2;
-	set_stack_index(stack1);
-	set_stack_index(stack2);
-	
-	temp = stack2;
-	while (stack1)
-	{
-		stack2 = temp;
-		target = find_max(stack2);
-		while (stack2)
+void	find_target(t_stack *from, t_stack *to)
+{
+    t_stack	*temp_to;
+    t_stack	*closest;
+    int		closest_diff;
+
+    while (from)
+    {
+        closest = NULL;
+        closest_diff = INT_MAX;
+        temp_to = to;
+        while (temp_to)
+        {
+            if (temp_to->data < from->data && (from->data - temp_to->data) < closest_diff)
+            {
+                closest = temp_to;
+                closest_diff = from->data - temp_to->data;
+            }
+            temp_to = temp_to->next;
+        }
+		if (!closest)
 		{
-			if (stack1->data == 25)
-			{
-				printf("[target] --> %i\n",target->data);
-				// 10 > 13 && 10 > 13 --> FALSE
-				// 10 > 0  && 0  > 13 --> FALSE
-				if (stack1->data > stack2->data && stack2->data < target->data)
-				{
-					printf("%i - true\n",stack2->data);
-				} else
-				{
-					printf("%i - false\n",stack2->data);
-				}
-			}
-			// if (stack1->data > stack2->data && stack2->data < target->data)
-			// {
-			// 	target = stack2;
-			// }
-			stack2 = stack2->next;
+			closest = find_max(to);
 		}
-		stack1->target = target;
-		stack1 = stack1->next;
-	}
+        from->target = closest;
+        from = from->next;
+    }
+}
 
+int	above_median(int size, int index)
+{
+	int	median;
 
-
-
-
-	while (temp2)
+	median = size / 2;
+	if (index <= median)
 	{
-		temp2->target = temp1;
-
-		temp2 = temp2->next;
+		return (TRUE);
 	}
+	return (FALSE);
+}
+
+
+void	calc_push_cost(t_stack *from, t_stack *to)
+{
+	int	size_from;
+	int	size_to;
+	int	cost_a;
+	int	cost_b;
+
+	size_from = ft_lstsize_ps(from);
+	size_to = ft_lstsize_ps(to);
+	while (from)
+	{
+		if (above_median(size_from, from->index))
+			cost_a = from->index;
+		else
+			cost_a = size_from - from->index;
+		if (above_median(size_to, from->target->index))
+			cost_b = from->target->index;
+		else
+			cost_b = size_to - from->target->index;
+		if ((above_median(size_from, from->index) == above_median(size_to, from->target->index)))
+		{
+			if (cost_a > cost_b)
+				from->push_cost = cost_a;
+			else
+				from->push_cost = cost_b;
+		}
+		else
+			from->push_cost = cost_a + cost_b;
+		from = from->next;
+	}
+}
+
+void	init_stack(t_stack *from, t_stack *to)
+{	
+	set_stack_index(from);
+	set_stack_index(to);
+	find_target(from, to);
+	find_target(to, from); // for testing no segfault
+	calc_push_cost(from, to);
+
 }
 
 
@@ -112,6 +145,7 @@ void	sort(t_stack **a, t_stack **b)
 	{
 		a_size--;
 		push(a, b);
+		push(a, b); // for testing
 	}
 	init_stack(*a, *b);
 	// while (a_size > 3 && !check_is_sorted(*a))

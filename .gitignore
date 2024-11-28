@@ -3,3 +3,4 @@
 sources/myLibft/libft.a
 push_swap
 /objects/
+/sources/myLibft/objects/

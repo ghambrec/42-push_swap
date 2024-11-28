@@ -47,7 +47,7 @@ void	test_print_stack(t_stack *stack, char *text)
 	printf("%s", text);
 	while (stack != NULL)
 	{
-		printf("%i: [%i] TG:[%i]\n",stack->index, stack->data, stack->target->data);
+		printf("%i: [%i] TG:[%i] COST: %i\n",stack->index, stack->data, stack->target->data, stack->push_cost);
 		stack = stack->next;
 	}
 }
