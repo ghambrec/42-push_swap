@@ -6,7 +6,7 @@
 #    By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/18 18:50:52 by ghambrec          #+#    #+#              #
-#    Updated: 2024/11/27 15:02:23 by ghambrec         ###   ########.fr        #
+#    Updated: 2024/11/28 12:21:52 by ghambrec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ LIBFT_NAME = libft.a
 CFLAGS = -Wall -Wextra -Werror -I $(INCLUDE_DIR)
 
 # ---------- SOURCES ---------- #
-VPATH = ./sources
+VPATH = ./sources ./sources/psl
 SOURCES = main.c parsing.c list_operations.c psl_swap.c psl_push.c psl_rotate.c psl_reverse_rotate.c sort_max_3.c sort.c
 
 # ---------- OBJECTS ---------- #

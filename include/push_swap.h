@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:07:44 by ghambrec          #+#    #+#             */
-/*   Updated: 2024/11/27 15:38:11 by ghambrec         ###   ########.fr       */
+/*   Updated: 2024/11/28 12:38:12 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,18 @@
 # include "../sources/myLibft/include/my_libft.h"
 # include <stdio.h>
 # include <limits.h>
+# include <stdlib.h> // for testing
 
 # define TRUE 1
 # define FALSE 0
 
+// THE STACK
 typedef struct s_stack
 {
 	int				data;
+	int				index; // calc above median over this
+	int				push_cost; // calc cheapest node over this
+	struct s_stack	*target; // target node from the other stack
 	struct s_stack	*next;
 }	t_stack;
 
@@ -48,5 +53,6 @@ void	reverse_rotate_both(t_stack **a, t_stack **b);
 // SORTING
 void	sort_max_3(t_stack **a);
 void	sort(t_stack **a, t_stack **b);
+int		check_is_sorted(t_stack *a);
 
 #endif

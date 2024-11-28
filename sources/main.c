@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:03:25 by ghambrec          #+#    #+#             */
-/*   Updated: 2024/11/27 16:35:33 by ghambrec         ###   ########.fr       */
+/*   Updated: 2024/11/28 13:04:09 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,14 @@ void	test_print_stack(t_stack *stack, char *text)
 	printf("%s", text);
 	while (stack != NULL)
 	{
-		printf("[%i]\n", stack->data);
+		printf("%i: [%i] TG:[%i]\n",stack->index, stack->data, stack->target->data);
 		stack = stack->next;
 	}
+}
+
+void leaks(void)
+{
+	system("leaks push_swap");
 }
 
 int	main(int argc, char *argv[])
@@ -60,6 +65,7 @@ int	main(int argc, char *argv[])
 
 	a = NULL;
 	b = NULL;
+	// atexit(leaks);
 	parsing_result = start_parsing(argc, argv, &a);
 	if (parsing_result == EXIT_FAILURE)
 	{
@@ -80,6 +86,8 @@ int	main(int argc, char *argv[])
 	// test_print_stack(a, "SORTED--------------\n");
 	test_print_stack(a, "\nA:------------------\n");
 	test_print_stack(b, "\nB:------------------\n");
+
+	
 	free_stack(&a);
 	free_stack(&b);
 	return (EXIT_SUCCESS);	
