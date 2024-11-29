@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 15:03:15 by ghambrec          #+#    #+#             */
-/*   Updated: 2024/11/29 12:10:16 by ghambrec         ###   ########.fr       */
+/*   Updated: 2024/11/29 12:24:29 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,32 +70,24 @@ void	find_target(t_stack *from, t_stack *to)
     }
 }
 
-int	above_median(int size, int index)
+int	get_stack_size(t_stack *stack)
 {
-	int	median;
+	int	size;
 
-	median = size / 2;
-	if (index <= median)
-	{
-		return (TRUE);
-	}
-	return (FALSE);
-}
-
-int	above_median_v2(t_stack *stack)
-{
-	int	size_index;
-	int	stack_index;
-	int	median;
-
-	stack_index = stack->index;
 	while (stack)
 	{
-		size_index = stack->index;
+		size = stack->index;
 		stack = stack->next;
 	}
-	median = (size_index + 1) / 2;
-	if (stack_index <= median)
+	return (size + 1);
+}
+
+int	above_median(t_stack *stack)
+{
+	int	median;
+	
+	median = get_stack_size(stack) / 2;
+	if (stack->index <= median)
 	{
 		return (TRUE);
 	}
@@ -105,27 +97,20 @@ int	above_median_v2(t_stack *stack)
 
 void	calc_push_cost(t_stack *from, t_stack *to)
 {
-	int	size_from;
-	int	size_to;
 	int	cost_a;
 	int	cost_b;
-
-	size_from = ft_lstsize_ps(from);
-	size_to = ft_lstsize_ps(to);
+	
 	while (from)
 	{
-		// if (above_median(size_from, from->index))
-		if (above_median_v2(from))
+		if (above_median(from))
 			cost_a = from->index;
 		else
-			cost_a = size_from - from->index;
-		// if (above_median(size_to, from->target->index))
-		if (above_median_v2(from->target))
+			cost_a = get_stack_size(from) - from->index;
+		if (above_median(from->target))
 			cost_b = from->target->index;
 		else
-			cost_b = size_to - from->target->index;
-		// if ((above_median(size_from, from->index) == above_median(size_to, from->target->index)))
-		if ((above_median_v2(from) == above_median_v2(from->target)))
+			cost_b = get_stack_size(to) - from->target->index;
+		if ((above_median(from) == above_median(from->target)))
 		{
 			if (cost_a > cost_b)
 				from->push_cost = cost_a;
