@@ -6,13 +6,14 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:46:39 by ghambrec          #+#    #+#             */
-/*   Updated: 2024/11/25 18:01:15 by ghambrec         ###   ########.fr       */
+/*   Updated: 2024/11/29 16:25:01 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	push(t_stack **src, t_stack **dest)
+// pa + pb
+void	push(t_stack **src, t_stack **dest, char stack_name)
 {
 	t_stack *temp;
 
@@ -23,4 +24,8 @@ void	push(t_stack **src, t_stack **dest)
 	temp = *src;
 	*src = (*src)->next;
 	ft_lstadd_front_ps(dest, temp);
+	if (ft_isalpha(stack_name))
+	{
+		ft_printf("p%c\n", stack_name);
+	}
 }

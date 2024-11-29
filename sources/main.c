@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:03:25 by ghambrec          #+#    #+#             */
-/*   Updated: 2024/11/28 13:04:09 by ghambrec         ###   ########.fr       */
+/*   Updated: 2024/11/29 16:27:02 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	test_print_stack(t_stack *stack, char *text)
 	printf("%s", text);
 	while (stack != NULL)
 	{
-		printf("%i: [%i] TG:[%i] COST: %i\n",stack->index, stack->data, stack->target->data, stack->push_cost);
+		printf("%i: [%i] TG:[%i] COST: %i NAME:%c\n",stack->index, stack->data, stack->target->data, stack->push_cost, stack->name);
 		stack = stack->next;
 	}
 }

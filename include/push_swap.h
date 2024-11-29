@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:07:44 by ghambrec          #+#    #+#             */
-/*   Updated: 2024/11/28 12:38:12 by ghambrec         ###   ########.fr       */
+/*   Updated: 2024/11/29 16:26:37 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_stack
 	int				data;
 	int				index; // calc above median over this
 	int				push_cost; // calc cheapest node over this
+	char			name; // a or b
 	struct s_stack	*target; // target node from the other stack
 	struct s_stack	*next;
 }	t_stack;
@@ -42,12 +43,12 @@ int		ft_lstsize_ps(t_stack *lst);
 void	ft_lstadd_front_ps(t_stack **lst, t_stack *new);
 
 // PUSH-SWAP LANGUAGE
-void	swap(t_stack *stack);
+void	swap(t_stack *stack, char stack_name);
 void	swap_both(t_stack *a, t_stack *b);
-void	push(t_stack **src, t_stack **dest);
-void	rotate(t_stack **stack);
+void	push(t_stack **src, t_stack **dest, char stack_name);
+void	rotate(t_stack **stack, char stack_name);
 void	rotate_both(t_stack **a, t_stack **b);
-void	reverse_rotate(t_stack **stack);
+void	reverse_rotate(t_stack **stack, char stack_name);
 void	reverse_rotate_both(t_stack **a, t_stack **b);
 
 // SORTING

@@ -6,13 +6,14 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 15:03:15 by ghambrec          #+#    #+#             */
-/*   Updated: 2024/11/29 13:08:57 by ghambrec         ###   ########.fr       */
+/*   Updated: 2024/11/29 16:35:22 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	set_stack_index(t_stack *stack)
+// set index and name from the stack
+void	init_stack_basics(t_stack *stack, char stack_name)
 {
 	int i;
 
@@ -21,6 +22,7 @@ void	set_stack_index(t_stack *stack)
 	i = 0;
 	while (stack)
 	{
+		stack->name = stack_name;
 		stack->index = i;
 		i++;
 		stack = stack->next;
@@ -122,10 +124,10 @@ void	calc_push_cost(t_stack *from, t_stack *to)
 	}
 }
 
-void	init_stack(t_stack *from, t_stack *to)
+void	init_stack(t_stack *from, t_stack *to, char name_from, char name_to)
 {	
-	set_stack_index(from);
-	set_stack_index(to);
+	init_stack_basics(from, name_from);
+	init_stack_basics(to, name_to);
 	find_target(from, to);
 	find_target(to, from); // for testing no segfault
 	calc_push_cost(from, to);
@@ -164,16 +166,16 @@ void	move_to_top(t_stack *node1, t_stack *node2, t_stack **stack1, t_stack **sta
 	while (node1 != *stack1)
 	{
 		if (above_median(node1))
-			rotate(stack1);
+			rotate(stack1, node1->name);
 		else
-			reverse_rotate(stack1);
+			reverse_rotate(stack1, node1->name);
 	}
 	while (node2 != *stack2)
 	{
 		if (above_median(node2))
-			rotate(stack2);
+			rotate(stack2, node2->name);
 		else
-			reverse_rotate(stack2);
+			reverse_rotate(stack2, node2->name);
 	}
 }
 
@@ -202,17 +204,16 @@ void	sort(t_stack **a, t_stack **b)
 	if (a_size > 3 && !check_is_sorted(*a))
 	{
 		a_size--;
-		push(a, b);
+		push(a, b, 'b');
 	}
 	if (a_size > 3 && !check_is_sorted(*a))
 	{
 		a_size--;
-		push(a, b);
+		push(a, b, 'b');
 	}
-	push(a, b); // for testing
-	init_stack(*a, *b);
+	push(a, b, 'b'); // for testing
+	init_stack(*a, *b, 'a', 'b');
 	push_to_b(a, b);
-
 	
 	// while (a_size > 3 && !check_is_sorted(*a))
 	// {
