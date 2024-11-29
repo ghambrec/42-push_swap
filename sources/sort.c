@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 15:03:15 by ghambrec          #+#    #+#             */
-/*   Updated: 2024/11/29 17:13:21 by ghambrec         ###   ########.fr       */
+/*   Updated: 2024/11/29 17:32:27 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,9 @@ int	above_median(t_stack *stack)
 	return (FALSE);
 }
 
+// calculates the push cost for each node in the stack
+//		= number of operations needed to bring both the origin node and 
+// 		  his target node on top of their stacks
 void	calc_push_cost(t_stack *from, t_stack *to)
 {
 	int	cost_a;
@@ -179,16 +182,17 @@ void	move_to_top(t_stack *node1, t_stack *node2, t_stack **stack1, t_stack **sta
 	}
 }
 
-void	push_to_b(t_stack **a, t_stack **b)
+// push the cheapest node from the stack to the target stack
+void	push_cheapest_to_target_stack(t_stack **origin, t_stack **target)
 {
 	t_stack *cheapest;
 
-	cheapest = get_cheapest_stack(*a);
-	if (cheapest != *a || cheapest->target != *b)
+	cheapest = get_cheapest_stack(*origin);
+	if (cheapest != *origin || cheapest->target != *target)
 	{
-		move_to_top(cheapest, cheapest->target, a, b);
+		move_to_top(cheapest, cheapest->target, origin, target);
 	}
-	push(a, b, 'b');
+	push(origin, target, cheapest->target->name);
 	
 }
 
@@ -210,11 +214,16 @@ void	sort(t_stack **a, t_stack **b)
 	while (a_size > 3 && !check_is_sorted(*a))
 	{
 		init_stack(*a, *b, 'a', 'b');
-		push_to_b(a, b);
+		push_cheapest_to_target_stack(a, b);
 		a_size--;
 	}
 	sort_max_3(a);
 
-
-
+	// GO ON HERE:
+	// my plan:
+	// now push b back to a
+	// conditions: closest bigger value (the opposite to push a to b)
+	// again get both nodes on top (with move_to_top function)
+	// then push_cheapest_to_target_stack (test with this function)
+	// at the end get the min value from stack a and move it to top
 }
