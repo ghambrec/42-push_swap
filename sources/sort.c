@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 15:03:15 by ghambrec          #+#    #+#             */
-/*   Updated: 2024/11/29 16:35:22 by ghambrec         ###   ########.fr       */
+/*   Updated: 2024/11/29 17:13:21 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,6 +188,7 @@ void	push_to_b(t_stack **a, t_stack **b)
 	{
 		move_to_top(cheapest, cheapest->target, a, b);
 	}
+	push(a, b, 'b');
 	
 }
 
@@ -196,11 +197,6 @@ void	sort(t_stack **a, t_stack **b)
 	int	a_size;
 
 	a_size = ft_lstsize_ps(*a);
-	if (a_size <= 3)
-	{
-		sort_max_3(a);
-		return ;
-	}
 	if (a_size > 3 && !check_is_sorted(*a))
 	{
 		a_size--;
@@ -210,23 +206,15 @@ void	sort(t_stack **a, t_stack **b)
 	{
 		a_size--;
 		push(a, b, 'b');
+	}	
+	while (a_size > 3 && !check_is_sorted(*a))
+	{
+		init_stack(*a, *b, 'a', 'b');
+		push_to_b(a, b);
+		a_size--;
 	}
-	push(a, b, 'b'); // for testing
-	init_stack(*a, *b, 'a', 'b');
-	push_to_b(a, b);
-	
-	// while (a_size > 3 && !check_is_sorted(*a))
-	// {
-	// 	init_stack(*a);
-
-
-	// 	a_size--;
-	// }
+	sort_max_3(a);
 
 
 
-	// test cheapest function
-	// t_stack *x;
-	// x = get_cheapest_stack(*a);
-	// printf("CHEAPEST %i\n", x->data);
 }
