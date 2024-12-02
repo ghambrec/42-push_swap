@@ -4,3 +4,5 @@ sources/myLibft/libft.a
 push_swap
 /objects/
 /sources/myLibft/objects/
+log.txt
+sources/myLibft/make_log.txt
