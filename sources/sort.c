@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 15:03:15 by ghambrec          #+#    #+#             */
-/*   Updated: 2024/12/02 15:39:03 by ghambrec         ###   ########.fr       */
+/*   Updated: 2024/12/02 17:25:07 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	init_stack_basics(t_stack *stack, char stack_name)
 	}
 }
 
-t_stack *find_max(t_stack *stack)
+t_stack *get_max(t_stack *stack)
 {
 	t_stack *max;
 
@@ -43,7 +43,7 @@ t_stack *find_max(t_stack *stack)
 	return (max);
 }
 
-t_stack *find_min(t_stack *stack)
+t_stack *get_min(t_stack *stack)
 {
 	t_stack *min;
 
@@ -80,7 +80,7 @@ void	find_target_in_b(t_stack *a, t_stack *b)
         }
 		if (!closest)
 		{
-			closest = find_max(b);
+			closest = get_max(b);
 		}
         a->target = closest;
         a = a->next;
@@ -163,7 +163,7 @@ void	find_target_in_a(t_stack *b, t_stack *a)
 	}
 	if (!closest)
 	{
-		closest = find_min(a);
+		closest = get_min(a);
 	}
 	b->target = closest;
 }
@@ -256,6 +256,26 @@ void	push_to_target_stack(t_stack **origin, t_stack **target)
 	
 }
 
+void	check_min_on_top(t_stack **a)
+{
+	t_stack	*min;
+
+	min = get_min(*a);
+	if (*a != min)
+	{
+		if (above_median(get_min(*a)))
+		{
+			while (*a != min)
+				rotate(a, 'a');
+		}
+		else
+		{
+			while (*a != min)
+				reverse_rotate(a, 'a');
+		}
+	}
+}
+
 void	sort(t_stack **a, t_stack **b)
 {
 	int	a_size;
@@ -286,12 +306,5 @@ void	sort(t_stack **a, t_stack **b)
 		push_to_target_stack(b, a);
 		b_size--;
 	}
-	
-	// GO ON HERE:
-	// my plan:
-	// now push b back to a
-	// conditions: closest bigger value (the opposite to push a to b)
-	// again get both nodes on top (with move_to_top function)
-	// then push_to_target_stack (test with this function)
-	// at the end get the min value from stack a and move it to top
+	check_min_on_top(a);
 }
