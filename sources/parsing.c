@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 14:24:03 by ghambrec          #+#    #+#             */
-/*   Updated: 2024/11/25 17:19:47 by ghambrec         ###   ########.fr       */
+/*   Updated: 2024/12/02 21:12:33 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ static int	is_number(char *str)
 	if (ft_strchr("+-", *str))
 	{
 		str++;
+		if (!*str)
+		{
+			return (FALSE);
+		}
 	}
 	while (*str)
 	{
@@ -100,7 +104,7 @@ int	start_parsing(int argc, char **argv, t_stack **a)
 	{
 		return (EXIT_FAILURE);
 	}
-	if (argc == 2)
+	if (argc == 2 && ft_strlen(argv[1]) > 0)
 	{
 		split = ft_split(argv[1], ' ');
 		if (split == NULL)
