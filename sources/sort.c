@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 15:03:15 by ghambrec          #+#    #+#             */
-/*   Updated: 2024/12/02 14:59:18 by ghambrec         ###   ########.fr       */
+/*   Updated: 2024/12/02 15:39:03 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,22 +146,24 @@ void	calc_push_cost(t_stack *a, t_stack *b)
 void	find_target_in_a(t_stack *b, t_stack *a)
 {
     t_stack	*closest;
+	t_stack *temp_a;
     int		closest_diff;
 
+	temp_a = a;
 	closest = NULL;
 	closest_diff = INT_MAX;
-	while (a)
+	while (temp_a)
 	{
-		if (a->data > b->data && (a->data - b->data) < closest_diff)
+		if (temp_a->data > b->data && (temp_a->data - b->data) < closest_diff)
 		{
-			closest = a;
-			closest_diff = a->data - b->data;
+			closest = temp_a;
+			closest_diff = temp_a->data - b->data;
 		}
-		a = a->next;
+		temp_a = temp_a->next;
 	}
 	if (!closest)
 	{
-		closest = find_min(a); // find min bauen
+		closest = find_min(a);
 	}
 	b->target = closest;
 }
@@ -173,11 +175,12 @@ void	init_stack(t_stack *from, t_stack *to, char name_from, char name_to)
 	init_stack_basics(from, name_from);
 	init_stack_basics(to, name_to);
 
+	find_target_in_b(from, to); // for testing no segfault
 	find_target_in_b(to, from); // for testing no segfault
 
 	if (name_from == 'a')
 	{
-		find_target_in_b(from, to);
+		// find_target_in_b(from, to);
 		calc_push_cost(from, to);
 	}
 	else
@@ -191,7 +194,7 @@ void	init_stack(t_stack *from, t_stack *to, char name_from, char name_to)
 
 }
 
-t_stack *get_cheapest_stack(t_stack *stack)
+t_stack *get_cheapest_node(t_stack *stack)
 {
 	t_stack *cheapest;
 
@@ -237,22 +240,26 @@ void	move_to_top(t_stack *node1, t_stack *node2, t_stack **stack1, t_stack **sta
 }
 
 // push the cheapest node from the stack to the target stack
-void	push_cheapest_to_target_stack(t_stack **origin, t_stack **target)
+void	push_to_target_stack(t_stack **origin, t_stack **target)
 {
-	t_stack *cheapest;
+	t_stack *push_node;
 
-	cheapest = get_cheapest_stack(*origin);
-	if (cheapest != *origin || cheapest->target != *target)
+	if ((*origin)->name == 'a')
+		push_node = get_cheapest_node(*origin);
+	else
+		push_node = *origin;
+	if (push_node != *origin || push_node->target != *target)
 	{
-		move_to_top(cheapest, cheapest->target, origin, target);
+		move_to_top(push_node, push_node->target, origin, target);
 	}
-	push(origin, target, cheapest->target->name);
+	push(origin, target, push_node->target->name);
 	
 }
 
 void	sort(t_stack **a, t_stack **b)
 {
 	int	a_size;
+	int	b_size;
 
 	a_size = ft_lstsize_ps(*a);
 	if (a_size > 3 && !check_is_sorted(*a))
@@ -268,16 +275,23 @@ void	sort(t_stack **a, t_stack **b)
 	while (a_size > 3 && !check_is_sorted(*a))
 	{
 		init_stack(*a, *b, 'a', 'b');
-		push_cheapest_to_target_stack(a, b);
+		push_to_target_stack(a, b);
 		a_size--;
 	}
 	sort_max_3(a);
-	init_stack(*b, *a, 'b', 'a');
+	b_size = ft_lstsize_ps(*b);
+	while (b_size > 0)
+	{
+		init_stack(*b, *a, 'b', 'a');
+		push_to_target_stack(b, a);
+		b_size--;
+	}
+	
 	// GO ON HERE:
 	// my plan:
 	// now push b back to a
 	// conditions: closest bigger value (the opposite to push a to b)
 	// again get both nodes on top (with move_to_top function)
-	// then push_cheapest_to_target_stack (test with this function)
+	// then push_to_target_stack (test with this function)
 	// at the end get the min value from stack a and move it to top
 }
