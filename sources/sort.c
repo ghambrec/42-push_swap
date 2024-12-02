@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 15:03:15 by ghambrec          #+#    #+#             */
-/*   Updated: 2024/11/29 17:32:27 by ghambrec         ###   ########.fr       */
+/*   Updated: 2024/12/02 14:59:18 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,32 +43,47 @@ t_stack *find_max(t_stack *stack)
 	return (max);
 }
 
-void	find_target(t_stack *from, t_stack *to)
+t_stack *find_min(t_stack *stack)
 {
-    t_stack	*temp_to;
+	t_stack *min;
+
+	min = stack;
+	while (stack)
+	{
+		if (min->data > stack->data)
+			min = stack;
+		stack = stack->next;
+	}
+	return (min);
+}
+
+// closest smaller value
+void	find_target_in_b(t_stack *a, t_stack *b)
+{
+    t_stack	*temp_b;
     t_stack	*closest;
     int		closest_diff;
 
-    while (from)
+    while (a)
     {
         closest = NULL;
         closest_diff = INT_MAX;
-        temp_to = to;
-        while (temp_to)
+        temp_b = b;
+        while (temp_b)
         {
-            if (temp_to->data < from->data && (from->data - temp_to->data) < closest_diff)
+            if (temp_b->data < a->data && (a->data - temp_b->data) < closest_diff)
             {
-                closest = temp_to;
-                closest_diff = from->data - temp_to->data;
+                closest = temp_b;
+                closest_diff = a->data - temp_b->data;
             }
-            temp_to = temp_to->next;
+            temp_b = temp_b->next;
         }
 		if (!closest)
 		{
-			closest = find_max(to);
+			closest = find_max(b);
 		}
-        from->target = closest;
-        from = from->next;
+        a->target = closest;
+        a = a->next;
     }
 }
 
@@ -96,44 +111,83 @@ int	above_median(t_stack *stack)
 	return (FALSE);
 }
 
-// calculates the push cost for each node in the stack
+// calculates the push cost for each node in stack a
 //		= number of operations needed to bring both the origin node and 
 // 		  his target node on top of their stacks
-void	calc_push_cost(t_stack *from, t_stack *to)
+void	calc_push_cost(t_stack *a, t_stack *b)
 {
 	int	cost_a;
 	int	cost_b;
 	
-	while (from)
+	while (a)
 	{
-		if (above_median(from))
-			cost_a = from->index;
+		if (above_median(a))
+			cost_a = a->index;
 		else
-			cost_a = get_stack_size(from) - from->index;
-		if (above_median(from->target))
-			cost_b = from->target->index;
+			cost_a = get_stack_size(a) - a->index;
+		if (above_median(a->target))
+			cost_b = a->target->index;
 		else
-			cost_b = get_stack_size(to) - from->target->index;
-		if ((above_median(from) == above_median(from->target)))
+			cost_b = get_stack_size(b) - a->target->index;
+		if ((above_median(a) == above_median(a->target)))
 		{
 			if (cost_a > cost_b)
-				from->push_cost = cost_a;
+				a->push_cost = cost_a;
 			else
-				from->push_cost = cost_b;
+				a->push_cost = cost_b;
 		}
 		else
-			from->push_cost = cost_a + cost_b;
-		from = from->next;
+			a->push_cost = cost_a + cost_b;
+		a = a->next;
 	}
 }
+
+// closest bigger value
+void	find_target_in_a(t_stack *b, t_stack *a)
+{
+    t_stack	*closest;
+    int		closest_diff;
+
+	closest = NULL;
+	closest_diff = INT_MAX;
+	while (a)
+	{
+		if (a->data > b->data && (a->data - b->data) < closest_diff)
+		{
+			closest = a;
+			closest_diff = a->data - b->data;
+		}
+		a = a->next;
+	}
+	if (!closest)
+	{
+		closest = find_min(a); // find min bauen
+	}
+	b->target = closest;
+}
+
+
 
 void	init_stack(t_stack *from, t_stack *to, char name_from, char name_to)
 {	
 	init_stack_basics(from, name_from);
 	init_stack_basics(to, name_to);
-	find_target(from, to);
-	find_target(to, from); // for testing no segfault
-	calc_push_cost(from, to);
+
+	find_target_in_b(to, from); // for testing no segfault
+
+	if (name_from == 'a')
+	{
+		find_target_in_b(from, to);
+		calc_push_cost(from, to);
+	}
+	else
+	{
+		find_target_in_a(from, to);
+		
+	}
+	
+	
+	
 
 }
 
@@ -218,7 +272,7 @@ void	sort(t_stack **a, t_stack **b)
 		a_size--;
 	}
 	sort_max_3(a);
-
+	init_stack(*b, *a, 'b', 'a');
 	// GO ON HERE:
 	// my plan:
 	// now push b back to a
