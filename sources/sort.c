@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 15:03:15 by ghambrec          #+#    #+#             */
-/*   Updated: 2024/12/02 19:58:26 by ghambrec         ###   ########.fr       */
+/*   Updated: 2024/12/02 20:04:49 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -301,5 +301,6 @@ void	sort(t_stack **a, t_stack **b)
 		push_to_target_stack(b, a);
 		b_size--;
 	}
+	init_stack_basics(*a, 'a');
 	check_min_on_top(a);
 }
