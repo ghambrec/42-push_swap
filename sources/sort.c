@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 15:03:15 by ghambrec          #+#    #+#             */
-/*   Updated: 2024/12/02 17:25:07 by ghambrec         ###   ########.fr       */
+/*   Updated: 2024/12/02 19:58:26 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,36 @@
 void	init_stack_basics(t_stack *stack, char stack_name)
 {
 	int i;
+	int	median;
 
 	if (stack == NULL)
 		return ;
 	i = 0;
+	median = ft_lstsize_ps(stack) / 2;
 	while (stack)
 	{
 		stack->name = stack_name;
 		stack->index = i;
+		if (i <= median)
+			stack->above_median = TRUE;
+		else
+			stack->above_median = FALSE;
 		i++;
 		stack = stack->next;
 	}
+}
+
+
+int	get_stack_size(t_stack *stack)
+{
+	int	size;
+
+	while (stack)
+	{
+		size = stack->index;
+		stack = stack->next;
+	}
+	return (size + 1);
 }
 
 t_stack *get_max(t_stack *stack)
@@ -87,30 +106,6 @@ void	find_target_in_b(t_stack *a, t_stack *b)
     }
 }
 
-int	get_stack_size(t_stack *stack)
-{
-	int	size;
-
-	while (stack)
-	{
-		size = stack->index;
-		stack = stack->next;
-	}
-	return (size + 1);
-}
-
-int	above_median(t_stack *stack)
-{
-	int	median;
-	
-	median = get_stack_size(stack) / 2;
-	if (stack->index <= median)
-	{
-		return (TRUE);
-	}
-	return (FALSE);
-}
-
 // calculates the push cost for each node in stack a
 //		= number of operations needed to bring both the origin node and 
 // 		  his target node on top of their stacks
@@ -121,15 +116,15 @@ void	calc_push_cost(t_stack *a, t_stack *b)
 	
 	while (a)
 	{
-		if (above_median(a))
+		if (a->above_median)
 			cost_a = a->index;
 		else
 			cost_a = get_stack_size(a) - a->index;
-		if (above_median(a->target))
+		if (a->target->above_median)
 			cost_b = a->target->index;
 		else
 			cost_b = get_stack_size(b) - a->target->index;
-		if ((above_median(a) == above_median(a->target)))
+		if (a->above_median == a->target->above_median)
 		{
 			if (cost_a > cost_b)
 				a->push_cost = cost_a;
@@ -213,26 +208,26 @@ t_stack *get_cheapest_node(t_stack *stack)
 // function to move both nodes at the top of their stacks
 void	move_to_top(t_stack *node1, t_stack *node2, t_stack **stack1, t_stack **stack2)
 {
-	if (above_median(node1) && above_median(node2))
+	if (node1->above_median && node2->above_median)
 	{
 		while (node1 != *stack1 && node2 != *stack2)
 			rotate_both(stack1, stack2);
 	}
-	if (!above_median(node1) && !above_median(node2))
+	if (!node1->above_median && !node2->above_median)
 	{
 		while (node1 != *stack1 && node2 != *stack2)
 			reverse_rotate_both(stack1, stack2);
 	}
 	while (node1 != *stack1)
 	{
-		if (above_median(node1))
+		if (node1->above_median)
 			rotate(stack1, node1->name);
 		else
 			reverse_rotate(stack1, node1->name);
 	}
 	while (node2 != *stack2)
 	{
-		if (above_median(node2))
+		if (node2->above_median)
 			rotate(stack2, node2->name);
 		else
 			reverse_rotate(stack2, node2->name);
@@ -263,7 +258,7 @@ void	check_min_on_top(t_stack **a)
 	min = get_min(*a);
 	if (*a != min)
 	{
-		if (above_median(get_min(*a)))
+		if (min->above_median)
 		{
 			while (*a != min)
 				rotate(a, 'a');

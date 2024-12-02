@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:07:44 by ghambrec          #+#    #+#             */
-/*   Updated: 2024/11/29 16:26:37 by ghambrec         ###   ########.fr       */
+/*   Updated: 2024/12/02 19:46:56 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ typedef struct s_stack
 	int				data;
 	int				index; // calc above median over this
 	int				push_cost; // calc cheapest node over this
+	int				above_median;
 	char			name; // a or b
 	struct s_stack	*target; // target node from the other stack
 	struct s_stack	*next;

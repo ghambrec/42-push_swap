@@ -1,4 +1,3 @@
-make[1]: Entering directory '/home/pi/documents/42-push_swap/sources/myLibft'
 [0;31mCleaning object files[0m
 [0;31mRemoving libft.a[0m
 [0;33mCreating objects directory[0m
@@ -7,4 +6,3 @@ Archiving libft.a[0m
 [0;36m--------------------------------------[0m
 [0;32mBUILD PROCESS COMPLETED SUCCESSFULLY![0m
 [0;36m--------------------------------------[0m
-make[1]: Leaving directory '/home/pi/documents/42-push_swap/sources/myLibft'

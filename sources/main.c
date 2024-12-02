@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:03:25 by ghambrec          #+#    #+#             */
-/*   Updated: 2024/11/29 17:32:19 by ghambrec         ###   ########.fr       */
+/*   Updated: 2024/12/02 19:49:28 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,3 +92,7 @@ int	main(int argc, char *argv[])
 	free_stack(&b);
 	return (EXIT_SUCCESS);	
 }
+
+
+
+// bei make fclean noch mylibft clearen
