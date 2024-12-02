@@ -6,7 +6,7 @@
 #    By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/18 18:50:52 by ghambrec          #+#    #+#              #
-#    Updated: 2024/11/28 12:21:52 by ghambrec         ###   ########.fr        #
+#    Updated: 2024/12/02 20:47:56 by ghambrec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,8 @@ CFLAGS = -Wall -Wextra -Werror -I $(INCLUDE_DIR)
 
 # ---------- SOURCES ---------- #
 VPATH = ./sources ./sources/psl
-SOURCES = main.c parsing.c list_operations.c psl_swap.c psl_push.c psl_rotate.c psl_reverse_rotate.c sort_max_3.c sort.c
+SOURCES =	main.c parsing.c list_operations.c psl_swap.c psl_push.c psl_rotate.c \
+			psl_reverse_rotate.c sort_max_3.c sort.c initialization.c list_get_functions.c
 
 # ---------- OBJECTS ---------- #
 OBJECT_DIR = objects
