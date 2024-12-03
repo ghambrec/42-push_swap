@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: ghamnbrec <ghambrec@student.42heilbronn    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 14:24:03 by ghambrec          #+#    #+#             */
-/*   Updated: 2024/12/02 21:12:33 by ghambrec         ###   ########.fr       */
+/*   Updated: 2024/12/03 15:23:10 by ghamnbrec        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@ static void	free_split(char **split)
 
 static int	is_number(char *str)
 {
+	if (!*str)
+	{
+		return (FALSE);
+	}
 	if (ft_strchr("+-", *str))
 	{
 		str++;
