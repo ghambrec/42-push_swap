@@ -3,15 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+         #
+#    By: ghamnbrec <ghambrec@student.42heilbronn    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/18 18:50:52 by ghambrec          #+#    #+#              #
-#    Updated: 2024/12/02 20:51:41 by ghambrec         ###   ########.fr        #
+#    Updated: 2024/12/03 12:00:45 by ghamnbrec        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # ---------- MAIN ---------- #
 NAME = push_swap
+NAME_CHECKER = checker
 CC = cc
 INCLUDE_DIR = ./include
 LIBFT_DIR = ./sources/myLibft
@@ -23,9 +24,12 @@ VPATH = ./sources ./sources/psl
 SOURCES =	main.c parsing.c list_operations.c psl_swap.c psl_push.c psl_rotate.c \
 			psl_reverse_rotate.c sort_max_3.c sort.c initialization.c list_get_functions.c
 
+SOURCES_BONUS = checker.c
+
 # ---------- OBJECTS ---------- #
 OBJECT_DIR = objects
 OBJECTS = $(addprefix $(OBJECT_DIR)/, $(SOURCES:.c=.o))
+OBJECTS_BONUS = $(addprefix $(OBJECT_DIR)/, $(SOURCES_BONUS:.c=.o))
 
 # ---------- COLORS AND STUFF ---------- #
 GREEN = \033[0;32m
@@ -35,14 +39,11 @@ CYAN = \033[0;36m
 NC = \033[0m
 CLEAR_LINE = \033[2K\r
 
-TOTAL_SRCS = $(words $(SOURCES))
-CURRENT = 0
-
 # ---------- RULES ---------- #
 all: $(NAME)
 
 $(NAME): $(LIBFT_NAME) $(OBJECTS)
-	@echo "$(YELLOW)\nCompiling $(NAME)$(NC)"
+	@echo "$(YELLOW)Compiling $(NAME)$(NC)"
 	@cc $(CFLAGS) $(OBJECTS) $(LIBFT_DIR)/$(LIBFT_NAME) -o $(NAME)
 	@if [ -f $(NAME) ]; then \
 		echo "$(CYAN)--------------------------------------$(NC)"; \
@@ -55,7 +56,7 @@ $(NAME): $(LIBFT_NAME) $(OBJECTS)
 
 # test rule for faster testing (without compiling myLibft again)
 test: $(OBJECTS)
-	@echo "$(YELLOW)\nCompiling $(NAME)$(NC)"
+	@echo "$(YELLOW)Compiling $(NAME)$(NC)"
 	@cc $(CFLAGS) $(OBJECTS) $(LIBFT_DIR)/$(LIBFT_NAME) -o $(NAME)
 	@if [ -f $(NAME) ]; then \
 		echo "$(CYAN)--------------------------------------$(NC)"; \
@@ -81,14 +82,28 @@ $(LIBFT_NAME):
 	fi
 
 $(OBJECT_DIR)/%.o: %.c | $(OBJECT_DIR)
-	@$(eval CURRENT := $(shell echo $$(($(CURRENT) + 1))))
-	@$(eval PERCENT := $(shell echo $$(($(CURRENT) * 100 / $(TOTAL_SRCS)))))
-	@printf "$(CLEAR_LINE)$(YELLOW)Compiling $(PERCENT)%% [$(CURRENT)/$(TOTAL_SRCS)] $(CYAN)$<$(NC)"
+# @$(eval CURRENT := $(shell echo $$(($(CURRENT) + 1))))
+# @$(eval PERCENT := $(shell echo $$(($(CURRENT) * 100 / $(TOTAL_SRCS)))))
+	@printf "$(YELLOW)Compiling $(CYAN)$<\n$(NC)"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJECT_DIR):
 	@echo "$(YELLOW)Creating $(OBJECT_DIR) directory$(NC)"
 	@mkdir -p $(OBJECT_DIR)
+
+# for testing without flags
+bonus: CFLAGS = -I $(INCLUDE_DIR) 
+bonus: $(LIBFT_NAME) $(NAME) $(OBJECTS_BONUS)
+	@echo "$(YELLOW)Compiling bonus $(NAME_CHECKER)$(NC)"
+	@cc $(CFLAGS) $(OBJECTS_BONUS) $(LIBFT_DIR)/$(LIBFT_NAME) -o $(NAME_CHECKER)
+	@if [ -f checker ]; then \
+		echo "$(CYAN)--------------------------------------$(NC)"; \
+		echo "$(GREEN)BONUS PROCESS COMPLETED SUCCESSFULLY!$(NC)"; \
+		echo "$(CYAN)--------------------------------------$(NC)"; \
+	else \
+		echo "$(RED)failed to compile bonus$(NAME)$(NC)"; \
+		exit 1; \
+	fi
 
 clean:
 	@echo "$(RED)Cleaning object files$(NC)"
@@ -97,6 +112,7 @@ clean:
 fclean: clean
 	@echo "$(RED)Removing $(NAME)$(NC)"
 	@rm -f $(NAME)
+	@rm -f $(NAME_CHECKER)
 	@make fclean -C $(LIBFT_DIR)
 
 re: fclean all
