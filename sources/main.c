@@ -3,31 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: ghamnbrec <ghambrec@student.42heilbronn    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:03:25 by ghambrec          #+#    #+#             */
-/*   Updated: 2024/12/02 20:48:48 by ghambrec         ###   ########.fr       */
+/*   Updated: 2024/12/03 14:53:33 by ghamnbrec        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-static void	free_stack(t_stack **stack)
-{
-	t_stack	*temp;
-
-	if (*stack == NULL)
-	{
-		return ;
-	}
-	while (*stack != NULL)
-	{
-		temp = (*stack)->next;
-		free(*stack);
-		*stack = temp;
-	}
-	*stack = NULL;
-}
 
 // void	test_print_stack(t_stack *stack, char *text)
 // {

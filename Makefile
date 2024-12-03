@@ -6,7 +6,7 @@
 #    By: ghamnbrec <ghambrec@student.42heilbronn    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/18 18:50:52 by ghambrec          #+#    #+#              #
-#    Updated: 2024/12/03 12:00:45 by ghamnbrec        ###   ########.fr        #
+#    Updated: 2024/12/03 15:02:35 by ghamnbrec        ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ VPATH = ./sources ./sources/psl
 SOURCES =	main.c parsing.c list_operations.c psl_swap.c psl_push.c psl_rotate.c \
 			psl_reverse_rotate.c sort_max_3.c sort.c initialization.c list_get_functions.c
 
-SOURCES_BONUS = checker.c
+SOURCES_BONUS = checker.c parsing.c list_get_functions.c list_operations.c sort.c sort_max_3.c \
+				initialization.c psl_swap.c psl_push.c psl_rotate.c psl_reverse_rotate.c
 
 # ---------- OBJECTS ---------- #
 OBJECT_DIR = objects
@@ -82,8 +83,6 @@ $(LIBFT_NAME):
 	fi
 
 $(OBJECT_DIR)/%.o: %.c | $(OBJECT_DIR)
-# @$(eval CURRENT := $(shell echo $$(($(CURRENT) + 1))))
-# @$(eval PERCENT := $(shell echo $$(($(CURRENT) * 100 / $(TOTAL_SRCS)))))
 	@printf "$(YELLOW)Compiling $(CYAN)$<\n$(NC)"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
@@ -91,9 +90,7 @@ $(OBJECT_DIR):
 	@echo "$(YELLOW)Creating $(OBJECT_DIR) directory$(NC)"
 	@mkdir -p $(OBJECT_DIR)
 
-# for testing without flags
-bonus: CFLAGS = -I $(INCLUDE_DIR) 
-bonus: $(LIBFT_NAME) $(NAME) $(OBJECTS_BONUS)
+bonus: $(LIBFT_NAME) $(OBJECTS_BONUS)
 	@echo "$(YELLOW)Compiling bonus $(NAME_CHECKER)$(NC)"
 	@cc $(CFLAGS) $(OBJECTS_BONUS) $(LIBFT_DIR)/$(LIBFT_NAME) -o $(NAME_CHECKER)
 	@if [ -f checker ]; then \

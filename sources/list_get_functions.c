@@ -3,14 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   list_get_functions.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: ghamnbrec <ghambrec@student.42heilbronn    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 20:37:58 by ghambrec          #+#    #+#             */
-/*   Updated: 2024/12/02 20:48:06 by ghambrec         ###   ########.fr       */
+/*   Updated: 2024/12/03 12:23:52 by ghamnbrec        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	free_stack(t_stack **stack)
+{
+	t_stack	*temp;
+
+	if (*stack == NULL)
+	{
+		return ;
+	}
+	while (*stack != NULL)
+	{
+		temp = (*stack)->next;
+		free(*stack);
+		*stack = temp;
+	}
+	*stack = NULL;
+}
 
 int	get_stack_size(t_stack *stack)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   psl_rotate.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: ghamnbrec <ghambrec@student.42heilbronn    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 18:12:53 by ghambrec          #+#    #+#             */
-/*   Updated: 2024/11/29 16:21:58 by ghambrec         ###   ########.fr       */
+/*   Updated: 2024/12/03 14:24:09 by ghamnbrec        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,12 @@ void	rotate(t_stack **stack, char stack_name)
 }
 
 // rr
-void	rotate_both(t_stack **a, t_stack **b)
+void	rotate_both(t_stack **a, t_stack **b, int print)
 {
 	rotate(a, '0');
 	rotate(b, '0');
-	ft_printf("rr\n");
+	if (print == TRUE)
+	{
+		ft_printf("rr\n");
+	}
 }

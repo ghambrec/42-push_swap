@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: ghamnbrec <ghambrec@student.42heilbronn    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:07:44 by ghambrec          #+#    #+#             */
-/*   Updated: 2024/12/02 20:48:04 by ghambrec         ###   ########.fr       */
+/*   Updated: 2024/12/03 14:23:09 by ghamnbrec        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,15 +42,16 @@ t_stack	*ft_lstlast_ps(t_stack *lst);
 void	ft_lstadd_back_ps(t_stack **lst, t_stack *new);
 int		ft_lstsize_ps(t_stack *lst);
 void	ft_lstadd_front_ps(t_stack **lst, t_stack *new);
+void	free_stack(t_stack **stack);
 
 // PUSH-SWAP LANGUAGE
 void	swap(t_stack *stack, char stack_name);
-void	swap_both(t_stack *a, t_stack *b);
+void	swap_both(t_stack *a, t_stack *b, int print);
 void	push(t_stack **src, t_stack **dest, char stack_name);
 void	rotate(t_stack **stack, char stack_name);
-void	rotate_both(t_stack **a, t_stack **b);
+void	rotate_both(t_stack **a, t_stack **b, int print);
 void	reverse_rotate(t_stack **stack, char stack_name);
-void	reverse_rotate_both(t_stack **a, t_stack **b);
+void	reverse_rotate_both(t_stack **a, t_stack **b, int print);
 
 // SORTING
 void	sort_max_3(t_stack **a);

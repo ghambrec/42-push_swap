@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
+/*   By: ghamnbrec <ghambrec@student.42heilbronn    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 15:03:15 by ghambrec          #+#    #+#             */
-/*   Updated: 2024/12/02 20:47:36 by ghambrec         ###   ########.fr       */
+/*   Updated: 2024/12/03 14:25:42 by ghamnbrec        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ void	move_to_top(t_stack *node1, t_stack *node2, t_stack **stack1, t_stack **sta
 	if (node1->above_median && node2->above_median)
 	{
 		while (node1 != *stack1 && node2 != *stack2)
-			rotate_both(stack1, stack2);
+			rotate_both(stack1, stack2, TRUE);
 	}
 	if (!node1->above_median && !node2->above_median)
 	{
 		while (node1 != *stack1 && node2 != *stack2)
-			reverse_rotate_both(stack1, stack2);
+			reverse_rotate_both(stack1, stack2, TRUE);
 	}
 	while (node1 != *stack1)
 	{
