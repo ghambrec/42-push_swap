@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 14:24:03 by ghambrec          #+#    #+#             */
-/*   Updated: 2024/12/04 13:41:05 by ghambrec         ###   ########.fr       */
+/*   Updated: 2024/12/04 19:12:08 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,10 +104,6 @@ int	start_parsing(int argc, char **argv, t_stack **a)
 	int		parsing_result;
 	char	**split;
 
-	if (argc < 2)
-	{
-		return (EXIT_FAILURE);
-	}
 	if (argc == 2 && ft_strlen(argv[1]) > 0)
 	{
 		split = ft_split(argv[1], ' ');

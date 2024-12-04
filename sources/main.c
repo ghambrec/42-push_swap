@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:03:25 by ghambrec          #+#    #+#             */
-/*   Updated: 2024/12/04 12:47:48 by ghambrec         ###   ########.fr       */
+/*   Updated: 2024/12/04 19:21:04 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	main(int argc, char *argv[])
 
 	a = NULL;
 	b = NULL;
+	if (argc < 2)
+		return (EXIT_SUCCESS);
 	parsing_result = start_parsing(argc, argv, &a);
 	if (parsing_result == EXIT_FAILURE)
 	{
