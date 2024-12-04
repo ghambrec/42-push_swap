@@ -6,7 +6,7 @@
 #    By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/18 18:50:52 by ghambrec          #+#    #+#              #
-#    Updated: 2024/12/04 13:44:33 by ghambrec         ###   ########.fr        #
+#    Updated: 2024/12/04 13:48:51 by ghambrec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,16 @@ $(NAME): $(LIBFT_NAME) $(OBJECTS)
 		echo "$(CYAN)--------------------------------------$(NC)"; \
 	else \
 		echo "$(RED)failed to compile $(NAME)$(NC)"; \
+		exit 1; \
+	fi
+
+$(LIBFT_NAME):
+	@echo "$(YELLOW)Creating $(LIBFT_NAME)$(NC)"
+	@make re -C $(LIBFT_DIR) > $(LIBFT_DIR)/make_log.txt
+	@if [ -f $(LIBFT_DIR)/$(LIBFT_NAME) ]; then \
+		echo "$(GREEN)$(LIBFT_NAME) successfully created$(NC)"; \
+	else \
+		echo "$(RED)failed to compile $(LIBFT_DIR)$(NC)"; \
 		exit 1; \
 	fi
 
