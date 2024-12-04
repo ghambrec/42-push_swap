@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 11:30:00 by ghambrec          #+#    #+#             */
-/*   Updated: 2024/12/04 12:49:08 by ghambrec         ###   ########.fr       */
+/*   Updated: 2024/12/04 17:28:33 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void	read_operations(t_stack **a, t_stack **b)
 	{
 		operation = get_next_line(STDIN_FILENO);
 		if (operation == NULL)
-			break ;
+			return ;
 		run_operation(operation, a, b);
 		free(operation);
 	}
