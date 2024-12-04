@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 17:46:39 by ghambrec          #+#    #+#             */
-/*   Updated: 2024/11/29 16:25:01 by ghambrec         ###   ########.fr       */
+/*   Updated: 2024/12/04 13:46:25 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // pa + pb
 void	push(t_stack **src, t_stack **dest, char stack_name)
 {
-	t_stack *temp;
+	t_stack	*temp;
 
 	if (*src == NULL)
 	{

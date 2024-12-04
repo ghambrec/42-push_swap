@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghamnbrec <ghambrec@student.42heilbronn    +#+  +:+       +#+        */
+/*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 15:03:15 by ghambrec          #+#    #+#             */
-/*   Updated: 2024/12/03 14:25:42 by ghamnbrec        ###   ########.fr       */
+/*   Updated: 2024/12/04 13:07:57 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ int	check_is_sorted(t_stack *a)
 }
 
 // function to move both nodes at the top of their stacks
-void	move_to_top(t_stack *node1, t_stack *node2, t_stack **stack1, t_stack **stack2)
+void	move_to_top(t_stack *node1, t_stack *node2, \
+					t_stack **stack1, t_stack **stack2)
 {
 	if (node1->above_median && node2->above_median)
 	{
@@ -57,7 +58,7 @@ void	move_to_top(t_stack *node1, t_stack *node2, t_stack **stack1, t_stack **sta
 // push the cheapest node from the stack to the target stack
 void	push_to_target_stack(t_stack **origin, t_stack **target)
 {
-	t_stack *push_node;
+	t_stack	*push_node;
 
 	if ((*origin)->name == 'a')
 		push_node = get_cheapest_node(*origin);
@@ -68,7 +69,6 @@ void	push_to_target_stack(t_stack **origin, t_stack **target)
 		move_to_top(push_node, push_node->target, origin, target);
 	}
 	push(origin, target, push_node->target->name);
-	
 }
 
 void	check_min_on_top(t_stack **a)
@@ -97,16 +97,10 @@ void	sort(t_stack **a, t_stack **b)
 	int	b_size;
 
 	a_size = ft_lstsize_ps(*a);
-	if (a_size > 3 && !check_is_sorted(*a))
-	{
-		a_size--;
+	if (a_size-- > 3 && !check_is_sorted(*a))
 		push(a, b, 'b');
-	}
-	if (a_size > 3 && !check_is_sorted(*a))
-	{
-		a_size--;
+	if (a_size-- > 3 && !check_is_sorted(*a))
 		push(a, b, 'b');
-	}	
 	while (a_size > 3 && !check_is_sorted(*a))
 	{
 		init_stack(*a, *b, 'a', 'b');

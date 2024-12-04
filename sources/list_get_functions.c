@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   list_get_functions.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghamnbrec <ghambrec@student.42heilbronn    +#+  +:+       +#+        */
+/*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 20:37:58 by ghambrec          #+#    #+#             */
-/*   Updated: 2024/12/03 12:23:52 by ghamnbrec        ###   ########.fr       */
+/*   Updated: 2024/12/04 12:46:58 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

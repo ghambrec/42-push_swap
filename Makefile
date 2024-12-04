@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ghamnbrec <ghambrec@student.42heilbronn    +#+  +:+       +#+         #
+#    By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/18 18:50:52 by ghambrec          #+#    #+#              #
-#    Updated: 2024/12/03 15:02:35 by ghamnbrec        ###   ########.fr        #
+#    Updated: 2024/12/04 13:44:33 by ghambrec         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,6 @@ RED = \033[0;31m
 YELLOW = \033[0;33m
 CYAN = \033[0;36m
 NC = \033[0m
-CLEAR_LINE = \033[2K\r
 
 # ---------- RULES ---------- #
 all: $(NAME)
@@ -52,33 +51,6 @@ $(NAME): $(LIBFT_NAME) $(OBJECTS)
 		echo "$(CYAN)--------------------------------------$(NC)"; \
 	else \
 		echo "$(RED)failed to compile $(NAME)$(NC)"; \
-		exit 1; \
-	fi
-
-# test rule for faster testing (without compiling myLibft again)
-test: $(OBJECTS)
-	@echo "$(YELLOW)Compiling $(NAME)$(NC)"
-	@cc $(CFLAGS) $(OBJECTS) $(LIBFT_DIR)/$(LIBFT_NAME) -o $(NAME)
-	@if [ -f $(NAME) ]; then \
-		echo "$(CYAN)--------------------------------------$(NC)"; \
-		echo "$(GREEN)BUILD PROCESS COMPLETED SUCCESSFULLY!$(NC)"; \
-		echo "$(CYAN)--------------------------------------$(NC)"; \
-	else \
-		echo "$(RED)failed to compile $(NAME)$(NC)"; \
-		exit 1; \
-	fi
-
-# exec test without flags
-testnf: CFLAGS = -I $(INCLUDE_DIR)
-testnf: test
-	
-$(LIBFT_NAME):
-	@echo "$(YELLOW)Creating $(LIBFT_NAME)$(NC)"
-	@make re -C $(LIBFT_DIR) > $(LIBFT_DIR)/make_log.txt
-	@if [ -f $(LIBFT_DIR)/$(LIBFT_NAME) ]; then \
-		echo "$(GREEN)$(LIBFT_NAME) successfully created$(NC)"; \
-	else \
-		echo "$(RED)failed to compile $(LIBFT_DIR)$(NC)"; \
 		exit 1; \
 	fi
 

@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 20:32:33 by ghambrec          #+#    #+#             */
-/*   Updated: 2024/12/02 20:36:34 by ghambrec         ###   ########.fr       */
+/*   Updated: 2024/12/04 12:58:18 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 // set index and name from the stack
 void	init_stack_basics(t_stack *stack, char stack_name)
 {
-	int i;
+	int	i;
 	int	median;
 
 	if (stack == NULL)
@@ -38,31 +38,31 @@ void	init_stack_basics(t_stack *stack, char stack_name)
 // closest smaller value
 static void	find_target_in_b(t_stack *a, t_stack *b)
 {
-    t_stack	*temp_b;
-    t_stack	*closest;
-    int		closest_diff;
+	t_stack	*temp_b;
+	t_stack	*closest;
+	int		min_diff;
 
-    while (a)
-    {
-        closest = NULL;
-        closest_diff = INT_MAX;
-        temp_b = b;
-        while (temp_b)
-        {
-            if (temp_b->data < a->data && (a->data - temp_b->data) < closest_diff)
-            {
-                closest = temp_b;
-                closest_diff = a->data - temp_b->data;
-            }
-            temp_b = temp_b->next;
-        }
+	while (a)
+	{
+		closest = NULL;
+		min_diff = INT_MAX;
+		temp_b = b;
+		while (temp_b)
+		{
+			if (temp_b->data < a->data && (a->data - temp_b->data) < min_diff)
+			{
+				closest = temp_b;
+				min_diff = a->data - temp_b->data;
+			}
+			temp_b = temp_b->next;
+		}
 		if (!closest)
 		{
 			closest = get_max(b);
 		}
-        a->target = closest;
-        a = a->next;
-    }
+		a->target = closest;
+		a = a->next;
+	}
 }
 
 // calculates the push cost for each node in stack a
@@ -72,7 +72,7 @@ static void	calc_push_cost(t_stack *a, t_stack *b)
 {
 	int	cost_a;
 	int	cost_b;
-	
+
 	while (a)
 	{
 		if (a->above_median)
@@ -99,19 +99,19 @@ static void	calc_push_cost(t_stack *a, t_stack *b)
 // closest bigger value
 static void	find_target_in_a(t_stack *b, t_stack *a)
 {
-    t_stack	*closest;
-	t_stack *temp_a;
-    int		closest_diff;
+	t_stack	*closest;
+	t_stack	*temp_a;
+	int		min_diff;
 
 	temp_a = a;
 	closest = NULL;
-	closest_diff = INT_MAX;
+	min_diff = INT_MAX;
 	while (temp_a)
 	{
-		if (temp_a->data > b->data && (temp_a->data - b->data) < closest_diff)
+		if (temp_a->data > b->data && (temp_a->data - b->data) < min_diff)
 		{
 			closest = temp_a;
-			closest_diff = temp_a->data - b->data;
+			min_diff = temp_a->data - b->data;
 		}
 		temp_a = temp_a->next;
 	}
@@ -123,7 +123,7 @@ static void	find_target_in_a(t_stack *b, t_stack *a)
 }
 
 void	init_stack(t_stack *from, t_stack *to, char name_from, char name_to)
-{	
+{
 	init_stack_basics(from, name_from);
 	init_stack_basics(to, name_to);
 	if (name_from == 'a')
@@ -133,6 +133,6 @@ void	init_stack(t_stack *from, t_stack *to, char name_from, char name_to)
 	}
 	else
 	{
-		find_target_in_a(from, to);		
+		find_target_in_a(from, to);
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghamnbrec <ghambrec@student.42heilbronn    +#+  +:+       +#+        */
+/*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 15:07:44 by ghambrec          #+#    #+#             */
-/*   Updated: 2024/12/03 14:23:09 by ghamnbrec        ###   ########.fr       */
+/*   Updated: 2024/12/04 13:46:07 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,7 @@
 # define PUSH_SWAP_H
 
 # include "../sources/myLibft/include/my_libft.h"
-# include <stdio.h>
 # include <limits.h>
-# include <stdlib.h> // for testing
 
 # define TRUE 1
 # define FALSE 0
@@ -25,11 +23,11 @@
 typedef struct s_stack
 {
 	int				data;
-	int				index; // calc above median over this
-	int				push_cost; // calc cheapest node over this
+	int				index;
+	int				push_cost;
 	int				above_median;
-	char			name; // a or b
-	struct s_stack	*target; // target node from the other stack
+	char			name;
+	struct s_stack	*target;
 	struct s_stack	*next;
 }	t_stack;
 
@@ -64,8 +62,8 @@ void	init_stack_basics(t_stack *stack, char stack_name);
 
 // LIST GET FUNCTIONS
 int		get_stack_size(t_stack *stack);
-t_stack *get_max(t_stack *stack);
-t_stack *get_min(t_stack *stack);
+t_stack	*get_max(t_stack *stack);
+t_stack	*get_min(t_stack *stack);
 t_stack	*get_cheapest_node(t_stack *stack);
 
 #endif

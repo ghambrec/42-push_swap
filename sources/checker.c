@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghamnbrec <ghambrec@student.42heilbronn    +#+  +:+       +#+        */
+/*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/03 11:30:00 by ghamnbrec         #+#    #+#             */
-/*   Updated: 2024/12/03 14:58:38 by ghamnbrec        ###   ########.fr       */
+/*   Created: 2024/12/03 11:30:00 by ghambrec          #+#    #+#             */
+/*   Updated: 2024/12/04 12:49:08 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	main(int argc, char *argv[])
 		if (a != NULL)
 			free_stack(&a);
 		ft_putstr_fd("Error\n", STDERR_FILENO);
-		return(EXIT_FAILURE);
+		return (EXIT_FAILURE);
 	}
 	read_operations(&a, &b);
 	if (check_is_sorted(a) && ft_lstsize_ps(b) == 0)

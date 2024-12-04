@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   psl_swap.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghamnbrec <ghambrec@student.42heilbronn    +#+  +:+       +#+        */
+/*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 14:24:06 by ghambrec          #+#    #+#             */
-/*   Updated: 2024/12/03 14:24:54 by ghamnbrec        ###   ########.fr       */
+/*   Updated: 2024/12/04 13:46:33 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 void	swap(t_stack *stack, char stack_name)
 {
 	int	temp;
-	
+
 	if (ft_lstsize_ps(stack) <= 1)
 	{
 		return ;

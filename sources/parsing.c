@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ghamnbrec <ghambrec@student.42heilbronn    +#+  +:+       +#+        */
+/*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 14:24:03 by ghambrec          #+#    #+#             */
-/*   Updated: 2024/12/03 15:23:10 by ghamnbrec        ###   ########.fr       */
+/*   Updated: 2024/12/04 13:41:05 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static int	check_duplicate(int num, t_stack *a)
 // error handling:
 //		argument is not a number
 //		argument is out of int range
-//		duplivate values
+//		duplicate values
 // add numbers to the a-stack
 static int	parse_input_data(char **data, t_stack **a)
 {
