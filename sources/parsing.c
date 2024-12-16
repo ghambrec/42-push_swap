@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 14:24:03 by ghambrec          #+#    #+#             */
-/*   Updated: 2024/12/16 15:59:02 by ghambrec         ###   ########.fr       */
+/*   Updated: 2024/12/16 16:00:08 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,4 +122,3 @@ int	start_parsing(int argc, char **argv, t_stack **a)
 	}
 	return (EXIT_FAILURE);
 }
-
