@@ -6,7 +6,7 @@
 /*   By: ghambrec <ghambrec@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 14:24:03 by ghambrec          #+#    #+#             */
-/*   Updated: 2024/12/04 19:12:08 by ghambrec         ###   ########.fr       */
+/*   Updated: 2024/12/16 15:59:02 by ghambrec         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,16 +70,16 @@ static int	check_duplicate(int num, t_stack *a)
 // add numbers to the a-stack
 static int	parse_input_data(char **data, t_stack **a)
 {
-	int		i;
 	long	current_num;
 	t_stack	*created_list;
 
-	i = 0;
-	while (data[i])
+	while (*data)
 	{
-		if (!is_number(data[i]))
+		if (ft_strlen(*data) > 11)
 			return (EXIT_FAILURE);
-		current_num = ft_atol(data[i]);
+		if (!is_number(*data))
+			return (EXIT_FAILURE);
+		current_num = ft_atol(*data);
 		if (current_num < INT_MIN || current_num > INT_MAX)
 			return (EXIT_FAILURE);
 		if (check_duplicate(current_num, *a) == EXIT_FAILURE)
@@ -91,7 +91,7 @@ static int	parse_input_data(char **data, t_stack **a)
 			*a = created_list;
 		else
 			ft_lstadd_back_ps(a, created_list);
-		i++;
+		data++;
 	}
 	return (EXIT_SUCCESS);
 }
@@ -122,3 +122,4 @@ int	start_parsing(int argc, char **argv, t_stack **a)
 	}
 	return (EXIT_FAILURE);
 }
+
